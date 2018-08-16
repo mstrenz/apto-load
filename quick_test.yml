@@ -1,0 +1,16 @@
+---
+reporting:
+# WRITES RESULTS TO CSV
+- module: final_stats
+  dump-csv: results.csv
+
+execution:
+- concurrency: 1
+  ramp-up: 1ms
+  hold-for: 5s
+  scenario: quick-test
+
+scenarios:
+  quick-test:
+    requests:
+    - url: https://www.apto.com

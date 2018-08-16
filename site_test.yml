@@ -1,0 +1,39 @@
+---
+reporting:
+- module: passfail
+  criteria:
+# ERROR TESTS
+   - rc4??>0 for 1s, stop as failed
+   - rc5??>0 for 1s, stop as failed
+   - succ<100% for 1s, stop as failed
+# RESPONSE TIME TESTS
+   - avg-rt of load>10s for 10s, stop as failed
+
+# PRODUCED JUNIT RESULTS FOR JENKINS?
+- module: junit-xml
+  data-source: pass-fail
+# WRITES RESULTS TO CSV
+- module: final_stats
+  data-source: pass-fail
+  dump-csv: /results/results.csv
+
+execution:
+- concurrency: 5
+  ramp-up: 1s
+  hold-for: 10s
+  scenario: load
+
+scenarios:
+  load:
+    timeout: 30s
+    retrieve-resources: false
+    headers:
+      Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJJZCI6IjAwRDZBMDAwMDAxV2hPRlVBMC8wMDU2QTAwMDAwME5rTkJRQTAiLCJVc2VybmFtZSI6Im1hdHRAc3Bva2UtcWEuY29tIiwiT3JnYW5pemF0aW9uIjoiMDBENkEwMDAwMDFXaE9GVUEwIiwiVXNlcl9JZCI6IkhrTlBpV0RtWiIsIkluc3RhbmNlVXJsIjoiaHR0cHM6Ly9hcHRvdHVkZS0zMzI1LmNsb3VkZm9yY2UuY29tIiwiRW1haWwiOiJtc3RyZW56QGFwdG8uY29tIiwiTGVnYWN5VXNlcklkIjoiSGtOUGlXRG1aIiwiU2ZDb25uZWN0aW9uRGV0YWlscyI6eyJkZXRhaWxzIjoiWmpFMll6QmxaR1UzWW1ZelpXTm1NV0ptWlRjd1pUWTNZVGM1WVRVMU1EY3dPREEzTnpreU1UTmhNVFk1WVRObFlqQTVPREEzTWpBMU9URmpOak16WmpFNU5ERTRNV1kwT0dGbFpHVXlNREptWmpGbU9UVm1Nak5oTVRZME5EUXlaV1ZoWTJNMk1EWmtNemc1T1dNd09UWXpObUl4TTJNeVpEVXhNVEF4TmpnelltTXhZV1JrTmpreE5EZGtaVEUwWWpObFpHRXpOVEl3WlRjeU5qQmhPVEEzTUdNMVl6SXlNakF6TkRrek5XVTVaVGxpTmpoalltWXpZVFl3WVRJMlpUTmhZMlptTURneU9XVTVORGczWW1VNU4yWmpNMk5tWmpNMU56YzVZVGxoTVRWbU16bG1ZakkxWTJFd09HSTVZbUl4Wm1SallUTXpOemd6Tm1Wa01EZGhaV1ZrTkRSaFl6TmlNalV3TlRjeE56aGxaak14TnpjMFltTTRNbUl4TWpoaVpqUXlOV0V5T0RkaFlqUXlObUV3TW1GallqUm1ZalJrT1dGbU9UVmpaREJtTlRFd1ptRmhNREl5WXpoak5UWXlaRFEwTVRrMlltTmtNalJqWmpWbU5tSXpabVUyT1dVMlpUUmxaREJtT0dGall6TTROak5oTkRObFpUVTJOR0l5WlRRNVkyTmlORFV6TnpVMk1UUTJNMkV6TldWaU4yVTFaV1U0WlRjMU16STNPR0U1TmpRME9EZG1ZemxpT1RGallUSTBOREEwTTJabE9HVmxZbVJrWkRRek9USXhabVUxTlRZek16TmxaV0UzTXpFeVlURTBNamt3TkRVek4yWmxORGd4TkRnNU16Z3lNV1JqTWpVMFpUSmxZelptTmpnNFptUmxPVEV3TmpVd05UTmhOek5tTUdWbVlqaGtObVZqTW1Sak4yWXdPR00xWm1ReVpUUXhOamxrTjJGaE9EVXlaakE0WmpReU1UazVPR1EzWW1FNU56TXhaamhtIiwiaW5zdGFuY2VVcmwiOiJodHRwczovL2FwdG90dWRlLTMzMjUuY2xvdWRmb3JjZS5jb20ifSwiaWF0IjoxNTM0MjkwNTQxLCJpc3MiOiJhcHRvLWFwaSIsImVuYWJsZWRGZWF0dXJlcyI6WyJtYXBwaW5nX3YxIiwiTGlzdGluZ3MiLCJMZWFzaW5nIiwiRGVhbHMiXX0.40bMfB3fnWgW4zOMAlFY7ZAdQ27Tg3Nz-R3ZStR1nxQ
+    requests:
+    - url: https://project-nibbler.herokuapp.com/checkLogin
+    - url: https://project-nibbler.herokuapp.com/api/desktop/metadata/fieldcheck
+    - url: https://project-nibbler.herokuapp.com/api/v3/call-list
+    - url: https://project-nibbler.herokuapp.com/api/v3/companies
+    - url: https://project-nibbler.herokuapp.com/api/v3/contacts
+    - url: https://project-nibbler.herokuapp.com/api/v3/properties
+
