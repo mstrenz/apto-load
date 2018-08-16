@@ -9,5 +9,5 @@ any 500 error codes
 
 
 # Step 1 : pull/start container
-docker run -e env={APIURL} -e users=5 -e length=1m -e token={APITOKEN} -v $(pwd)/testResults/loadResults:/results --rm -it mstrenz/taurus-load:latest
+docker run -e env={APIURL} -e users=5 -e length=1m -e token={APITOKEN} -v $(pwd)/testResults/loadResults:/results --rm -it aptoadmin/load:latest
 

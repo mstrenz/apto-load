@@ -1,6 +1,6 @@
 *.idea
 *.iml
 *.directory
+*.log
+testResults
 
-results
-2016*
